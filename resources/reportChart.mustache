@@ -1,0 +1,72 @@
+<div class="container-fluid"  style="width:80%">
+</br>
+<table class="table">
+      <tr>
+        <td><div id="http_chart" style="border: 1px solid #ccc"></div></td>
+        <td><div id="domain_chart" style="border: 1px solid #ccc"></div></td>
+        <td><div id="zipfschart" style="border: 1px solid #ccc"></div></td>
+      </tr>
+
+    </table>
+</div>
+
+<script type="text/javascript" src="http://cdn.zingchart.com/zingchart.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+ google.charts.load('current', {'packages':['corechart']});
+ var httpCodeChart= function(){
+ 	   var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Http Codes');
+        data.addColumn('number', 'Number of Pages');
+        data.addRows([
+        {{#httpCodes}}
+          ['{{HttpCode}}', {{count}}],
+         {{/httpCodes}}
+         
+        ]);
+        var options = {title:'HTTP Codes',width:350,height:300};
+        var chart = new google.visualization.PieChart(document.getElementById('http_chart'));
+        chart.draw(data, options);
+ }
+ var domainsChart= function(){
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Domain');
+        data.addColumn('number', 'Number of Pages');
+        data.addRows([
+        {{#domainPages}}
+          ['{{DomainName}}',{{numberOfPages}}],
+        {{/domainPages}}
+        	
+        ]);
+
+        // Set options for Anthony's pie chart.
+        var options = {title:'Domain',
+                       width:350,
+                       height:300};
+
+        
+        var chart = new google.visualization.PieChart(document.getElementById('domain_chart'));
+        chart.draw(data, options);
+ }
+ google.charts.setOnLoadCallback(httpCodeChart);
+ google.charts.setOnLoadCallback(domainsChart);
+ var myChart = {
+        "type": "line",
+        "title": {
+            "text": "Zipf's Distribution"
+        },
+        "series": [{
+            "values": [{{#wordCounts}}{{frequency}},{{/wordCounts}}]
+        }]
+    };
+    window.onload = function() {
+        zingchart.render({
+            id: "zipfschart",
+            data: myChart,
+            height: 300,
+            width: 350
+        });
+    };
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>

@@ -1,0 +1,30 @@
+    <div class="container-fluid" style="width:80%">
+    
+        <div class="sub-header">
+            <table class="table table-striped">
+            <caption>This is for {{hostName}}</caption>
+                <thead>
+                    <th>URL</th>
+                    <th>TITLE</th>
+                    <th>RESPONSE</th>
+                    <th>LOCAL COPY</th>
+                    <th>LOCAL TEXT</th>
+                    <th>NO OF LINKS</th>
+                   
+                </thead>
+                <tbody>
+                {{#pages}}
+                <tr>
+                    <td><a href="{{Url}}"> Link to Live Page</a></td>
+                    <td>{{Title}}</td>
+                    <td>{{HttpStatusCode}}</td>
+                    <td><a href="{{HTMLUri}}">Local HTML</a></td>
+                    <td><a href="{{TextUri}}">Local Text</a></td>
+                    <td>{{noOfLinks}}</td>
+                </tr>
+                {{/pages}}
+                </tbody>
+            </table>
+        </div>
+        </br>
+    </div>

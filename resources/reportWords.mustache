@@ -1,0 +1,14 @@
+<div class="container-fluid" style="width:40%">
+<table class="table table-striped">
+<caption>Word frequencies top 100</caption>
+                <thead>
+                    <th>Word</th>
+                    <th>Frequency</th>                   
+                </thead>
+                <tbody>
+                {{#words}}
+                <tr><td>{{Value}}</td><td>{{Count}}</td></tr>
+                {{/words}}
+                </tbody>
+ </table>
+</div> 
